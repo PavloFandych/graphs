@@ -13,7 +13,5 @@ func main() {
 		graph.AddVertex(i)
 	}
 
-	graph.AddEdge(1, 2)
-	graph.AddEdge(6, 2)
 	graph.Print()
 }
