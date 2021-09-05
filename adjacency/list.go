@@ -19,13 +19,17 @@ const (
 	black
 )
 
+var time = 0 // for dfs
+
 // ALVertex represents a alGraph vertex
 type ALVertex struct {
-	key      int
-	adjacent []*ALVertex
-	color    Color
-	distance int
-	previous *ALVertex
+	key        int
+	adjacent   []*ALVertex
+	color      Color
+	distance   int
+	previous   *ALVertex
+	firstTouch int // for dfs
+	complete   int // for dfs
 }
 
 type Edge struct {
@@ -38,7 +42,8 @@ func (g *ALGraph) AddALVertex(key int) {
 	if contains(g.vertices, key) {
 		fmt.Printf("\nVertex %v not added because it is an existing key", key)
 	} else {
-		g.vertices = append(g.vertices, &ALVertex{key, nil, white, math.MaxInt64, nil})
+		g.vertices = append(g.vertices,
+			&ALVertex{key, nil, white, math.MaxInt64, nil, 0, 0})
 	}
 }
 
@@ -79,10 +84,23 @@ func (g *ALGraph) getALVertex(key int) *ALVertex {
 	return nil
 }
 
-// Print will print the adjacency list for each vertex of the graph
-func (g *ALGraph) Print() {
+// PrintBFS will print the adjacency list for each vertex of the graph
+func (g *ALGraph) PrintBFS() {
 	for _, vertex := range g.vertices {
-		fmt.Printf("\nV ->  key: %v, color: %v, distance: %v, list: ", vertex.key, vertex.color, vertex.distance)
+		fmt.Printf("\nV ->  key: %v, color: %v, distance: %v, list: ",
+			vertex.key, vertex.color, vertex.distance)
+		for _, element := range vertex.adjacent {
+			fmt.Printf("%v ", element.key)
+		}
+	}
+	fmt.Println()
+}
+
+// PrintDFS will print the adjacency list for each vertex of the graph
+func (g *ALGraph) PrintDFS() {
+	for _, vertex := range g.vertices {
+		fmt.Printf("\nV ->  key: %v, color: %v, firstTouch: %v, complete: %v, list: ",
+			vertex.key, vertex.color, vertex.firstTouch, vertex.complete)
 		for _, element := range vertex.adjacent {
 			fmt.Printf("%v ", element.key)
 		}
@@ -113,4 +131,31 @@ func (g *ALGraph) BreadthFirstSearch(start int) {
 		}
 		vertex.color = black
 	}
+}
+
+func (g *ALGraph) DepthFirstSearch() {
+	for _, vertex := range g.vertices {
+		vertex.color = white
+		vertex.previous = nil
+	}
+	for _, vertex := range g.vertices {
+		if vertex.color == white {
+			visit(g.vertices, vertex)
+		}
+	}
+}
+
+func visit(vertices []*ALVertex, vertex *ALVertex) {
+	time++
+	vertex.firstTouch = time
+	vertex.color = grey
+	for _, v := range vertex.adjacent {
+		if v.color == white {
+			v.previous = vertex
+			visit(vertices, v)
+		}
+	}
+	vertex.color = black
+	time++
+	vertex.complete = time
 }

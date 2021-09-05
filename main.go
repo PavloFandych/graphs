@@ -38,8 +38,10 @@ func main() {
 	for _, edge := range edges {
 		alGraph.AddALEdge(edge)
 	}
-	alGraph.BreadthFirstSearch(8)
-	alGraph.Print()
+
+	//alGraph.BreadthFirstSearch(8)
+	alGraph.DepthFirstSearch()
+	alGraph.PrintDFS()
 }
 
 func findMaxKey(edges []*adjacency.Edge) int {
