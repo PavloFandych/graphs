@@ -10,13 +10,13 @@ type AMGraph struct {
 }
 
 func (g *AMGraph) FillIn(size int, edge []*Edge) {
-	//rows allocation
+	// rows allocation
 	g.matrix = make([][]int, size)
-	//traverse each row and allocate inner slice
+	// traverse each row and allocate inner slice
 	for i := 0; i < size; i++ {
 		g.matrix[i] = make([]int, size)
 	}
-	//filling in the matrix
+	// filling in the matrix
 	for _, v := range edge {
 		// -1 due to zero based indexing
 		g.matrix[v.From-1][v.To-1] = 1

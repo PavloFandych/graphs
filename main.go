@@ -6,40 +6,40 @@ import (
 
 func main() {
 	edges := []*adjacency.Edge{
-		{1, 2},
-		{1, 3},
-		{2, 1},
-		{3, 1},
-		{3, 4},
-		{4, 3},
-		{4, 5},
-		{4, 6},
-		{5, 4},
-		{5, 6},
-		{5, 7},
-		{6, 4},
-		{6, 5},
-		{6, 7},
-		{6, 8},
-		{7, 5},
-		{7, 6},
-		{7, 8},
-		{8, 6},
-		{8, 7},
+		{From: 1, To: 2},
+		{From: 1, To: 3},
+		{From: 2, To: 1},
+		{From: 3, To: 1},
+		{From: 3, To: 4},
+		{From: 4, To: 3},
+		{From: 4, To: 5},
+		{From: 4, To: 6},
+		{From: 5, To: 4},
+		{From: 5, To: 6},
+		{From: 5, To: 7},
+		{From: 6, To: 4},
+		{From: 6, To: 5},
+		{From: 6, To: 7},
+		{From: 6, To: 8},
+		{From: 7, To: 5},
+		{From: 7, To: 6},
+		{From: 7, To: 8},
+		{From: 8, To: 6},
+		{From: 8, To: 7},
 	}
 
-	//ADJACENCY LIST GRAPH
+	// ADJACENCY LIST GRAPH
 	alGraph := &adjacency.ALGraph{}
-	//vertices initialization
+	// vertices initialization
 	for i := 1; i < findMaxKey(edges)+1; i++ {
 		alGraph.AddALVertex(i)
 	}
-	//edges initialization
+	// edges initialization
 	for _, edge := range edges {
 		alGraph.AddALEdge(edge)
 	}
 
-	//alGraph.BreadthFirstSearch(8)
+	// alGraph.BreadthFirstSearch(8)
 	alGraph.DepthFirstSearch()
 	alGraph.PrintDFS()
 }
