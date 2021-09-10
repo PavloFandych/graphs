@@ -87,9 +87,9 @@ func (g *ALGraph) getALVertex(key int) *ALVertex {
 // PrintBFS will print the adjacency list for each vertex of the graph
 func (g *ALGraph) PrintBFS() {
 	for _, vertex := range g.vertices {
-		fmt.Printf("\nV->key:%v, color:%v, distance:%v, list: ", vertex.key, vertex.color, vertex.distance)
+		fmt.Printf("\nV->key:%2v, color:%1v, distance:%2v, list: ", vertex.key, vertex.color, vertex.distance)
 		for _, element := range vertex.adjacent {
-			fmt.Printf("%v ", element.key)
+			fmt.Printf("%-3v ", element.key)
 		}
 	}
 	fmt.Println()
@@ -98,7 +98,7 @@ func (g *ALGraph) PrintBFS() {
 // PrintDFS will print the adjacency list for each vertex of the graph
 func (g *ALGraph) PrintDFS() {
 	for _, vertex := range g.vertices {
-		fmt.Printf("\nV->key:%v, color:%v, firstTouch:%v, complete:%v, list: ",
+		fmt.Printf("\nV->key:%2v, color:%1v, firstTouch:%2v, complete:%3v, list: ",
 			vertex.key, vertex.color, vertex.firstTouch, vertex.complete)
 		for _, element := range vertex.adjacent {
 			fmt.Printf("%v ", element.key)
