@@ -30,8 +30,19 @@ func main() {
 
 	// ADJACENCY LIST GRAPH
 	alGraph := &adjacency.ALGraph{}
+
+	maxKey := func(edges []*adjacency.Edge) int {
+		max := 0
+		for _, edge := range edges {
+			if max < edge.From {
+				max = edge.From
+			}
+		}
+		return max
+	}(edges)
+
 	// vertices initialization
-	for i := 1; i < findMaxKey(edges)+1; i++ {
+	for i := 1; i < maxKey+1; i++ {
 		alGraph.AddALVertex(i)
 	}
 	// edges initialization
@@ -42,14 +53,4 @@ func main() {
 	// alGraph.BreadthFirstSearch(8)
 	alGraph.DepthFirstSearch()
 	alGraph.PrintDFS()
-}
-
-func findMaxKey(edges []*adjacency.Edge) int {
-	max := 0
-	for _, edge := range edges {
-		if max < edge.From {
-			max = edge.From
-		}
-	}
-	return max
 }
