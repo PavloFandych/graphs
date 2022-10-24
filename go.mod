@@ -1,3 +1,3 @@
 module graphs
 
-go 1.17
+go 1.19
